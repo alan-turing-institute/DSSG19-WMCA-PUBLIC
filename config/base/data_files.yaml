@@ -1,0 +1,29 @@
+# All raw csv and txt data files
+text_dict:
+  'National_Statistics_Postcode_Lookup_Latest_Centroids.csv': 'ONS_pcd_centroids'
+  'Local_Authority_District_to_County_December_2016_Lookup_in_England.csv': 'ONS_la_county_lookup'
+  'ons_demo/KS404UK_car_availability.csv': 'ONS_KS404UK_car_availability'
+  'ons_demo/KS102UK_age_structure.csv': 'ONS_KS102UK_age_structure'
+  'ons_demo/QS303EW_disability.csv': 'ONS_QS303EW_disability'
+  'ons_demo/KS601UK_employment.csv': 'ONS_KS601UK_employment'
+  'ons_demo/KS201UK_ethnicity.csv': 'ONS_KS201UK_ethnicity'
+  'ons_demo/KS101UK_usual_residents.csv': 'ONS_KS101UK_usual_residents'
+  'ons_demo/KS107UK_lone_parent.csv': 'ONS_KS107UK_lone_parent'
+  'ons_demo/KS501UK_students.csv': 'ONS_KS501UK_students'
+  'ons_demo/QS203UK_birth_country.csv': 'ONS_QS203UK_birth_country'
+  'ons_demo/QS205EW_english_proficiency.csv': 'ONS_QS205EW_english_proficiency'
+  'ons_demo/QS119EW_deprivation.csv': 'ONS_QS119EW_deprivation'
+  'ons_demo/QS613EW_approx_social_grade.csv': 'ONS_QS613EW_approx_social_grade'
+  'poi/Hospitals.csv': 'NHS_hospitals'
+  'poi/poi_job_centres.csv': 'ukgov_job_centres_wm'
+  'poi/poi_strategic_centres.csv': 'ukgov_strategic_centres_wm'
+  'poi/2017-2018_england_spine.csv': 'ukgov_schools_uk'
+  'poi/poi_childcare.csv': 'ofsted_childcare_wm'
+  'poi/Rail_Stations_in_England_and_Wales.csv': 'wmca_rail_stations_uk'
+
+# All raw spatial file folders, each containing only one .shp file (along with other files)
+gis_dict:
+  'Output_Area_December_2011_Generalised_Clipped_Boundaries_in_England_and_Wales': 'OA_boundaries_all'
+
+# Single OpenStreetMap data file for WM
+osm_file: 'west-midlands-latest.osm.pbf'

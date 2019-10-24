@@ -1,0 +1,144 @@
+#######################
+# Model configuration #
+#######################
+
+# Sub-populations of interest as dictionary keys
+# Under each sub-population name, list of the columns in SEMANTIC.oa that constitute that sub-population
+populations:
+  total:
+    - usual_residents_all
+  elderly:
+    - age_60_to_64
+    - age_65_to_74
+    - age_75_to_84
+    - age_85_to_89
+    - age_90_plus
+  disabled:
+    - disability_severe
+    - disability_moderate
+  no_car_hh:
+    - cars_no_car
+  econ_inactive:
+    - emp_inactive
+  unemployed:
+    - emp_active_unemployed
+  youth:
+    - age_16_to_17
+    - age_18_to_19
+    - age_20_to_24
+  white:
+    - eth_white
+  black:
+    - eth_black
+  asian:
+    - eth_asian_indian
+    - eth_asian_pakistani
+    - eth_asian_bangladeshi
+    - eth_asian_chinese
+    - eth_asian_other
+  born_outside_uk:
+    - birth_country_europe_ireland
+    - birth_country_europe_other_total
+    - birth_country_africa_total
+    - birth_country_mideast_asia_total
+    - birth_country_americas_total
+    - birth_country_antarctica_oceania_total
+    - birth_country_other
+  not_proficient_english:
+    - eng_prof_main_not_english_not_well
+    - eng_prof_main_not_english_cannot
+  students:
+    - students_16_to_17
+    - students_18_plus
+  lone_parent_hh:
+    - lone_parent_total
+  semi_un_skilled:
+    - grade_de   
+  imd_deprived:
+    - deprived_1_dim
+    - deprived_2_dim
+    - deprived_3_dim
+    - deprived_4_dim
+
+# Points of interest as dictionary keys, corresponding to values in `type` column of SEMANTIC.poi
+# For each POI type, the value is # of nearest POIs included for each OA; if not specified (empty dict), use
+# hyper_params['k_POI']
+points_of_interest:
+    #Hospital: 2
+    #Job Centre: 2
+    #Strategic Centre: 1
+    #School: 3 
+    #Childcare: 3
+    Rail Station: 2
+
+# Dict of time definitions, used for stratified sampling of timestamps
+time_defs:
+  time_of_day:
+    am peak:
+      - 6:30-8:30
+    pm peak:
+      - 16:30-19:00
+    inter-peak:
+      - 11:00-16:00
+    evening:
+      - 20:00-23:00
+    all:
+      - 6:30-23:00
+  day_of_week:
+    weekday:
+      - Tuesday
+    saturday:
+      - Saturday
+    sunday:
+      - Sunday
+  term:
+    start_date: 2019-9-1
+    end_date: 2019-10-1
+
+# List of time strata (segments)
+# For each stratum, sample n_sample timepoints if specified, otherwise hyper_params['n_timepoints']
+time_strata:
+  Weekday (AM peak):
+    time_of_day: am peak
+    day_of_week: weekday
+#    n_sample: 2
+  Weekday (PM peak):
+    time_of_day: pm peak
+    day_of_week: weekday
+  Weekday (inter-peak):
+    time_of_day: inter-peak
+    day_of_week: weekday
+  Weekday (evening):
+    time_of_day: evening
+    day_of_week: weekday
+  Saturday:
+    time_of_day: all
+    day_of_week: saturday
+  Sunday:
+    time_of_day: all
+    day_of_week: sunday
+
+## Hyperparameters
+hyper_params:
+  n_timepoint: 30
+  k_POI: 3
+#  maxMemory: 2
+#  maxWalkDistance: # currently not used
+#    - Inf
+#  numItineraries: # currently not used
+#    - 1
+
+## Metrics Returned
+# (all are parsed from XML in split_trips bc no cost, but this determines which are written 
+# to vis.map_attributes as unnecessary metrics at that stage make the dash load slowly
+metrics:
+   - total_time
+#   - walk_time
+#  - transfer_wait_time
+#   - initial_wait_time
+#  - transit_time
+  - walk_dist
+#  - transit_dist
+#  - total_dist
+#   - num_transfers
+   - fare 

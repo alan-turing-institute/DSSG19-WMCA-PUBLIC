@@ -1,0 +1,14 @@
+# keys are the populations we care about, as named in model_config.yaml
+# values are the columns in SEMANTIC.oa that we decide they map to
+
+elderly:
+    - age_75_to_84
+    - age_85_to_89
+    - age_90_plus
+disabled:
+    - disability_severe
+    - disability_moderate
+no_car:
+    - cars_no_car
+emp_inactive:
+    - emp_inactive

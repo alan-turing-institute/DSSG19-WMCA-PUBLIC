@@ -1,0 +1,11 @@
+pyyaml
+requests
+pandas
+numpy
+holidays
+datetime
+sqlalchemy
+python-dotenv
+psycopg2
+dash
+dash-daq

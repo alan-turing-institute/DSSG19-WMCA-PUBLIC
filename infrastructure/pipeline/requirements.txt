@@ -1,0 +1,9 @@
+pyyaml
+requests
+pandas
+numpy
+holidays
+datetime
+sqlalchemy
+python-dotenv
+psycopg2

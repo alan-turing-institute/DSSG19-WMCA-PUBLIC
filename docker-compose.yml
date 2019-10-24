@@ -1,0 +1,188 @@
+version: "3.7"
+
+services:
+  load-balancer:
+    build: ./infrastructure/load-balancer
+    links:
+      - otp_1:otp_1
+      - otp_2:otp_2
+      - otp_3:otp_3
+      - otp_4:otp_4
+      - otp_5:otp_5
+      - otp_6:otp_6
+      - otp_7:otp_7
+      - otp_8:otp_8
+      - otp_9:otp_9
+      - otp_10:otp_10
+      - otp_11:otp_11
+      - otp_12:otp_12
+    image: wmca/load-balancer
+    container_name: load-balancer
+    ports:
+      - "8888:8080"
+
+  otp_1:
+    build:
+      context: .
+      dockerfile: ./infrastructure/otp/Dockerfile
+    image: wmca/otp
+    container_name: otp_1
+    env_file: .env
+    ports:
+       - "8080:8080"
+    volumes:
+        - "./data:/wmca/data" 
+
+  otp_2:
+    image: wmca/otp
+    container_name: otp_2
+    depends_on:
+      - otp_1
+    env_file: .env
+    ports:
+      - "8081:8081"
+    volumes:
+      - "./data:/wmca/data" 
+
+  otp_3:
+    image: wmca/otp
+    container_name: otp_3
+    depends_on:
+      - otp_1
+    env_file: .env
+    ports:
+      - "8082:8082"
+    volumes:
+      - "./data:/wmca/data" 
+
+  otp_4:
+    image: wmca/otp
+    container_name: otp_4
+    depends_on:
+      - otp_1
+    env_file: .env
+    ports:
+      - "8083:8083"
+    volumes:
+      - "./data:/wmca/data" 
+
+  otp_5:
+    image: wmca/otp
+    container_name: otp_5
+    depends_on:
+      - otp_1
+    env_file: .env
+    ports:
+      - "8084:8084"
+    volumes:
+      - "./data:/wmca/data" 
+
+  otp_6:
+    image: wmca/otp
+    container_name: otp_6
+    depends_on:
+      - otp_1
+    env_file: .env
+    ports:
+      - "8085:8085"
+    volumes:
+      - "./data:/wmca/data" 
+
+  otp_7:
+    image: wmca/otp
+    container_name: otp_7
+    depends_on:
+      - otp_1
+    env_file: .env
+    ports:
+       - "8086:8086"
+    volumes:
+        - "./data:/wmca/data" 
+
+  otp_8:
+    image: wmca/otp
+    container_name: otp_8
+    depends_on:
+      - otp_1
+    env_file: .env
+    ports:
+      - "8087:8087"
+    volumes:
+      - "./data:/wmca/data" 
+
+  otp_9:
+    image: wmca/otp
+    container_name: otp_9
+    depends_on:
+      - otp_1
+    env_file: .env
+    ports:
+      - "8088:8088"
+    volumes:
+      - "./data:/wmca/data" 
+
+  otp_10:
+    image: wmca/otp
+    container_name: otp_10
+    depends_on:
+      - otp_1
+    env_file: .env
+    ports:
+      - "8089:8089"
+    volumes:
+      - "./data:/wmca/data" 
+
+  otp_11:
+    image: wmca/otp
+    container_name: otp_11
+    depends_on:
+      - otp_1
+    env_file: .env
+    ports:
+      - "8090:8090"
+    volumes:
+      - "./data:/wmca/data" 
+
+  otp_12:
+    image: wmca/otp
+    container_name: otp_12
+    depends_on:
+      - otp_1
+    env_file: .env
+    ports:
+      - "8091:8091"
+    volumes:
+      - "./data:/wmca/data" 
+
+  pipeline:
+    build:
+      context: ./infrastructure/pipeline
+      args: 
+        - pgpass=${POSTGRES_HOST}:${POSTGRES_PORT}:${POSTGRES_DB}:${POSTGRES_USER}:${POSTGRES_PASSWORD} 
+    image: wmca/pipeline
+    container_name: pipeline
+    tty: true
+    env_file: .env
+    volumes:
+      - "./data:/wmca/data"
+      - "./sql:/wmca/sql"
+      - "./src:/wmca/src"
+      - "./config:/wmca/config"
+      - "./results:/wmca/results"
+    extra_hosts:
+      - "outside:172.17.0.1"
+
+  dashboard:
+    build:
+      context: ./infrastructure/dashboard
+    image: wmca/dashboard
+    container_name: dashboard
+    env_file: .env
+    ports:
+      - "8050:8050"
+    volumes:
+      - "./src:/wmca/src"
+      - "./data:/wmca/data"
+    extra_hosts:
+      - "outside:172.17.0.1"
+
